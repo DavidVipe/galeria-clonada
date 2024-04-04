@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Galería de fotos con Flask</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/estilos.css">
+</head>
+
+<body class="container">
+    <h1>Fondos de pantalla</h1>
+    <ul class="menu">
+        <li><a href="/galeria" {% if activo == 'todos' %}class="active"{% endif %}>TODOS</a></li>
+        <li><a href="/galeria?tema=animales" {% if activo == 'animales' %}class="active"{% endif %}>Animales</a></li>
+        <li><a href="/galeria?tema=naturaleza" {% if activo == 'naturaleza' %}class="active"{% endif %}>Naturaleza</a></li>
+        <li><a href="/galeria?tema=ciudad" {% if activo == 'ciudad' %}class="active"{% endif %}>Ciudad</a></li>
+        <li><a href="/galeria?tema=deporte" {% if activo == 'deporte' %}class="active"{% endif %}>Deporte</a></li>
+        <li><a href="/galeria?tema=personas" {% if activo == 'personas' %}class="active"{% endif %}>Personas</a></li>
+        <li><a href="/aportar">APORTAR</a></li>
+    </ul>
+
+    <div class="text-center pt-5">
+        <h1>Fondos aportados</h1>
+    </div>
+    <hr>
+
+    {% if fondos %}
+
+    <div class="card-columns">
+        {% for fondo in fondos %}
+        <div class="card img-fluid">
+            <a href="/form_email?_id={{fondo['_id']}}">
+                <img class="card-img-top" src="static/fondos/{{fondo['fondo']}}" alt="{{fondo['fondo']}}" />
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">{{fondo["titulo"]}}</h4>
+                <p class="card-text">{{fondo["descripcion"]}}</p>
+                <div class="btn-group btn-group-sm">
+                    {% for tag in fondo.tags %}
+                    <a href="/galeria?tema={{tag}}">
+                        <button type="button" class="btn btn-outline-primary  btn-sm">{{tag}}</button>
+                    </a>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center pt-5">
+        <h1>¡Galería vacía! Seleccione APORTAR en el menú superior</h1>
+    </div>
+
+    {% endif %}
+
+</body>
+
+</html>
