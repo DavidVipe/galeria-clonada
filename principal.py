@@ -5,6 +5,12 @@ from bson import ObjectId
 from pymongo import MongoClient
 import os
 
+def usuario():
+	pass
+
+def password():
+	pass
+
 EXTENSIONES = ["png", "jpg", "jpeg"]
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "./static/fondos"
