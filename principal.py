@@ -5,9 +5,6 @@ from bson import ObjectId
 from pymongo import MongoClient
 import os
 
-def comprueba_fondo():
-	pass
-
 DOCUMENTOS = ["doc", "docx"]
 
 def usuario():
